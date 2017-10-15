@@ -76,7 +76,7 @@ class S3Auth(AuthBase):
             string_to_sign = string_to_sign.encode('utf8')
         digest = hmac.new(self.secret_key.encode('utf8'),
                           msg=string_to_sign,
-                          digestmod=hashlib.sha1).digest()
+                          digestmod=hashlib.sha256).digest()
         return base64.b64encode(digest).strip().decode('ascii')
 
     def string_to_sign(self, request):
